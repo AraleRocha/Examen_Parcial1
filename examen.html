@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portafolio</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="estilosExamen.css">
+</head>
+
+<body class="text-white">
+
+<!--Modal-->
+<div id="modal-overlay"
+     class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-[rgba(2,6,16,0.85)]">
+  <div id="modal-box" class="w-full max-w-[440px] bg-[#0b1120] border-1 border-gray-700 rounded-lg overflow-hidden animate-modal-in shadow-[0_0_0_1px_rgba(56,139,253,0.1),0_0_60px_rgba(56,139,253,0.07),0_30px_70px_rgba(0,0,0,0.8)]">
+    <div class="p-4 border-b border-gray-950">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 border-1 border-blue-900 bg-blue-100"
+               style="background: rgba(56,139,253,0.1)">
+            <i class="fa-solid fa-paper-plane text-blue-300 text-lg -rotate-3"></i>
+          </div>
+          <div>
+            <h2 class="m-0 text-base font-extrabold text-[#e6edf3] leading-tight">Contactar</h2>
+          </div>
+        </div>
+        <button id="modal-close" class="w-8 h-8 rounded-md flex items-center justify-center bg-[#070e1d] border-1 border-blue-900 text-blue-300 hover:text-white transition" aria-label="Cerrar modal">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+    </div>
+    <div class="p-4">
+      <form id="contact-form" novalidate class="flex flex-col gap-4">
+        <div>
+          <label for="nombre" class="block text-[10px] font-extrabold uppercase tracking-wider text-[#2d4a6e] mb-1">Nombre</label>
+          <div class="m-wrap">
+            <i class="fa-solid fa-user m-ico"></i>
+            <input id="nombre" name="nombre" type="text" class="m-input" placeholder="Tu nombre completo">
+          </div>
+          <p id="error-nombre" class="text-[11px] text-[#f87171] mt-1 hidden" style="display:none;">
+            <i class="fa-solid fa-circle-exclamation mr-2"></i>Ingresa tu nombre.
+          </p>
+        </div>
+        <div>
+          <label for="correo" class="block text-[10px] font-extrabold uppercase tracking-wider text-[#2d4a6e] mb-1">Correo electrónico</label>
+          <div class="m-wrap">
+            <i class="fa-solid fa-envelope m-ico"></i>
+            <input id="correo" name="correo" type="email" class="m-input" placeholder="tu@correo.com">
+          </div>
+          <p id="error-correo" class="text-[11px] text-[#f87171] mt-1 hidden" style="display:none;">
+            <i class="fa-solid fa-circle-exclamation mr-2"></i>Ingresa un correo válido.
+          </p>
+        </div>
+        <div>
+          <label for="asunto" class="block text-[10px] font-extrabold uppercase tracking-wider text-[#2d4a6e] mb-1">Asunto</label>
+          <div class="m-wrap">
+            <i class="fa-solid fa-tag m-ico"></i>
+            <input id="asunto" name="asunto" type="text" class="m-input" placeholder="¿De qué se trata?">
+          </div>
+          <p id="error-asunto" class="text-[11px] text-[#f87171] mt-1 hidden" style="display:none;">
+            <i class="fa-solid fa-circle-exclamation mr-2"></i>Añade un asunto.
+          </p>
+        </div>
+        <button id="btn-enviar" type="submit" class="m-btn">
+          <i id="icon-enviar" class="fa-solid fa-paper-plane text-xs"></i>
+          <span id="text-enviar">Enviar mensaje</span>
+        </button>
+        <!-- estado -->
+        <div id="mensaje-estado" class="hidden text-sm rounded-md p-3"></div>
+      </form>
+    </div>
+    <div class="px-5 pb-4 flex items-center gap-3">
+      <div class="flex-1 h-px bg-[#0d1829]"></div>
+      <span class="text-[10px] text-[#1a2c47] whitespace-nowrap flex items-center gap-2">
+        <i class="fa-solid fa-lock text-[9px]"></i>
+        Tus datos están seguros
+      </span>
+      <div class="flex-1 h-px bg-[#0d1829]"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="flex items-center px-6 py-3 gap-3 border-b border-gray-800">
+    <a href="#" class="flex items-center gap-2 text-white no-underline">
+        <div class="rounded-lg bg-gray-800 w-10 h-10 flex items-center justify-center">
+            <i class="fa-solid fa-a text-blue-400"></i>
+        </div>
+        <span class="text-lg font-bold tracking-wide">AraleRocha</span>
+    </a>
+    <div class="ml-auto flex items-center gap-2">
+        <button class="nav-btn" title="Español"><i class="fa-regular fa-flag"></i><span class="text-xs hidden sm:inline">ES</span></button>
+        <button class="nav-btn" title="English"><i class="fa-solid fa-flag"></i><span class="text-xs hidden sm:inline">EN</span></button>
+        <button class="nav-btn"><i class="fa-solid fa-moon"></i><span class="hidden sm:inline">Modo oscuro</span></button>
+    </div>
+</nav>
+
+<div class="container mx-auto py-8 px-4">
+    <!-- Primera fila -->
+    <div class="flex flex-col md:flex-row gap-4">
+        <div class="bg-slate-950 border-1 border-gray-700 hover:border-cyan-800 p-6 rounded-lg w-full md:w-2/3">
+            <span class="text-blue-500 text-sm font-semibold tracking-widest uppercase">Desarrollador Jr</span>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 mt-1">Mariana</h1>
+            <p class="text-gray-400 text-lg">Desarrollador Web especializado en Laravel y React. Experto en crear aplicaciones dinámicas y escalables bajo arquitectura MVC, integración de APIs RESTful, gestión de MySQL y control de versiones con Git.</p>
+            <div class="flex flex-wrap gap-3 mt-4">
+                <button id="btn-contactar" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors flex items-center gap-2">
+                    Contactar <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </button>
+                <button class="px-4 py-2 rounded-lg border-1 border-gray-600 hover:border-gray-400 transition-colors text-gray-300">
+                    Ver proyectos <i class="fa-solid fa-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-gray-950 border-1 border-gray-700 hover:border-cyan-800 p-6 rounded-lg w-full md:w-1/3">
+            <h3 class="text-gray-500 text-xs mb-3 uppercase">Estadísticas</h3>
+            <div class="flex justify-between items-center pb-4"">
+                <div>
+                    <div class="text-3xl font-black text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.4)]">20</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase">Proyectos Finalizados</div>
+                </div>
+                <div class="flex size-[46px] items-center justify-center rounded-full border-1 border-blue-500 text-blue-500" style="box-shadow:0 0 10px rgba(96,165,250,0.25)">
+                    <i class="fa-solid fa-folder-open" style="font-size:16px;"></i>
+                </div>
+            </div>
+            <div class="flex justify-between items-center py-4"">
+                <div>
+                    <div class="text-3xl font-black text-pink-400 drop-shadow-[0_0_8px_rgba(244,114,182,0.8)]">2</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase">Años de experiencia</div>
+                </div>
+                <div class="flex size-[46px] items-center justify-center rounded-full border-1 border-pink-500 text-pink-500" style="box-shadow:0 0 10px rgba(244,114,182,0.25);">
+                    <i class="fa-solid fa-briefcase" style="font-size:16px;"></i>
+                </div>
+            </div>
+            <div class="flex justify-between items-center pt-4">
+                <div>
+                    <div class="text-3xl font-black text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]">6</div>
+                    <div class="text-gray-500 text-xs mt-1 uppercase">Lenguajes</div>
+                </div>
+                <div class="flex size-[46px] items-center justify-center rounded-full border-1 border-purple-500 text-purple-500" style="box-shadow:0 0 10px rgba(168,85,247,0.25);">
+                    <i class="fa-solid fa-rocket" style="font-size:16px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Segunda fila -->
+    <div class="flex flex-col md:flex-row gap-4 mt-4">
+        <div class="bg-gray-950 border-1 border-gray-700 hover:border-cyan-800 rounded-lg w-full md:w-2/3 overflow-hidden">
+            <div class="relative overflow-hidden">
+                <img src="https://redautonomos.es/images/pymes/gestores-de-contenido.jpg" alt="Sistema de gestion" class="w-full object-cover rounded-t-lg transition-transform duration-500 hover:scale-110" style="height:220px;">
+                <div class="absolute bottom-0 left-0 right-0 px-4 py-3" style="background:linear-gradient(to top, rgba(1, 2, 3, 0.97), 55%,transparent 100%);">
+                    <span class="proj-tag laravel mr-1">Laravel</span>
+                    <span class="proj-tag tailwind">Tailwind</span>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-2xl font-bold">Sistema de gestion</h2>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-gray-400" style="font-size:22px;"></i>
+                </div>
+                <p class="text-sm text-gray-400">Desarrollado con laravel y react, este sistema de gestion permite a los usuarios administrar sus tareas diarias de manera eficiente.</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-950 border-1 border-gray-700 hover:border-cyan-800 p-6 rounded-lg w-full md:w-1/3">
+            <h3 class="text-gray-500 text-xs uppercase tracking-widest mb-4">Proyectos</h3>
+            <div class="grid grid-cols-3 gap-x-14 gap-y-7 mx-4">
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlKW7jviISXnLDd1yrUX523QMz8vKWBBu4Bw&s" class="border-1 border-gray-700 p-2 rounded-lg aspect-square object-cover hover:bg-gray-900 transition">
+                    <span class="text-gray-400 text-sm mt-1">PHP</span>
+                </div>
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8HA74bZAbN6-29MWfzEDunTc8nHguD7V_bQ&s" class="border-1 border-gray-700 p-2 rounded-lg aspect-square object-cover hover:bg-gray-900 transition">
+                    <span class="text-gray-400 text-sm mt-1">Java</span>
+                </div>
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG06zD3zZuY2AZDs345CcI5XkAFv8msnGHTw&s" class="border-1 border-gray-700 p-2 rounded-lg aspect-square object-cover hover:bg-gray-900 transition">
+                    <span class="text-gray-400 text-sm mt-1">Python</span>
+                </div>
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEPt5i7PVJmLMhT34TvOJkqJkHm6I2NZF-lA&s" class="border-1 border-gray-700 p-2 rounded-lg aspect-square object-cover hover:bg-gray-900 transition">
+                    <span class="text-gray-400 text-sm mt-1">MySQL</span>
+                </div>
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpeSXmCN2exkd7z0bCNgQvojiaFjbsPfJHSA&s" class="border-1 border-gray-700 p-2 rounded-lg aspect-square object-cover hover:bg-gray-900 transition">
+                    <span class="text-gray-400 text-sm mt-1">HTML</span>
+                </div>
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqks6bkM4tTJy69jDFqLrsOj9gRphGaB8Deg&s" class="border-1 border-gray-700 p-2 rounded-lg aspect-square object-cover hover:bg-gray-900 transition">
+                    <span class="text-gray-400 text-sm mt-1">CSS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tercera fila -->
+    <div class="flex flex-col md:flex-row gap-4 mt-4">
+        <div class="bg-gray-950 border-1 border-gray-700 hover:border-cyan-800 p-6 rounded-lg w-full md:w-1/3">
+            <div class="flex gap-3">
+                <div class="rounded-lg bg-blue-200 w-10 h-10 flex items-center justify-center mb-2 flex-shrink-0 opacity-75">
+                    <i class="fa-solid fa-folder-open text-blue-400"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold">Laboratorio</h2>
+                    <span class="text-xs block mb-2 text-gray-500">Proyectos realizados: 8</span>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400">En este laboratorio se desarrollan proyectos innovadores utilizando tecnologías como laravel y react.</p>
+        </div>
+        <div class="bg-gray-950 border-1 border-gray-700 hover:border-cyan-800 p-6 rounded-lg w-full md:w-1/3">
+            <div class="flex gap-3 mb-2">
+                <div class="rounded-lg bg-pink-200 w-10 h-10 flex items-center justify-center opacity-75">
+                    <i class="fa-solid fa-list-check text-pink-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <h3 class="font-bold">Gestion de proyectos</h3>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400">He gestionado proyectos con tecnologías como Laravel y React.</p>
+        </div>
+        <div class="bg-gray-950 border-1 border-gray-700 hover:border-cyan-800 p-6 rounded-lg w-full md:w-1/3">
+            <div class="flex gap-3 mb-2">
+                <div class="rounded-lg bg-purple-200 w-10 h-10 flex items-center justify-center opacity-75">
+                    <i class="fa-solid fa-people-group text-purple-400"></i>
+                </div>
+                <div class="flex items-center justify-center">
+                    <h3 class="font-bold ">Colaboracion en equipos</h3>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400">Colaborando en equipos multidisciplinarios para garantizar el éxito de cada proyecto.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+  $(function(){
+
+    const API = 'http://localhost:3000/enviar';
+
+    // Abrir o cerrar modal
+    $('#btn-contactar').on('click', function(){
+      $('#modal-overlay').removeClass('hidden').addClass('flex');
+    });
+    $('#modal-close').on('click', function(){
+      $('#modal-overlay').removeClass('flex').addClass('hidden');
+    });
+    $('#modal-overlay').on('click', function(e){
+      if(e.target === this) $(this).removeClass('flex').addClass('hidden');
+    });
+
+    // mostrar mensaje de respuesta
+    function showMessage(type, text){
+      const $m = $('#mensaje-estado');
+      $m.removeClass().addClass('text-sm rounded-md p-3');
+      if(type === 'success'){
+        $m.addClass('bg-green-900 text-green-200 border border-green-700').text(text).show();
+      } else if(type === 'error'){
+        $m.addClass('bg-red-900 text-red-200 border border-red-700').text(text).show();
+      } else {
+        $m.addClass('bg-yellow-900 text-yellow-200 border border-yellow-700').text(text).show();
+      }
+    }
+    function hideMessage(){ $('#mensaje-estado').hide().text(''); }
+
+    // Validación de datos
+    function validaCampos(nombre, correo, asunto){
+      let ok = true;
+      const rxEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!nombre){ $('#error-nombre').removeClass('hidden'); ok = false; } else { $('#error-nombre').addClass('hidden'); }
+      if(!correo || !rxEmail.test(correo)){ $('#error-correo').removeClass('hidden'); ok = false; } else { $('#error-correo').addClass('hidden'); }
+      if(!asunto){ $('#error-asunto').removeClass('hidden'); ok = false; } else { $('#error-asunto').addClass('hidden'); }
+      return ok;
+    }
+
+    // Envío AJAX
+    $('#contact-form').on('submit', function(ev){
+      ev.preventDefault();
+      hideMessage();
+
+      const nombre = $('#nombre').val().trim();
+      const correo = $('#correo').val().trim();
+      const asunto = $('#asunto').val().trim();
+
+      if(!validaCampos(nombre, correo, asunto)){
+        showMessage('error','Corrige los campos.');
+        return;
+      }
+
+      // bloquear botón
+      $('#btn-enviar').prop('disabled', true);
+      $('#icon-enviar').removeClass().addClass('fa-solid fa-spinner fa-spin');
+      $('#text-enviar').text('Enviando...');
+
+      $.ajax({
+        url: API,
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({ nombre: nombre, correo: correo, asunto: asunto }),
+        timeout: 12000
+      })
+      .done(function(res){
+        showMessage('success','Mensaje enviado correctamente');
+        $('#contact-form')[0].reset();
+        setTimeout(function(){
+          $('#modal-overlay').removeClass('flex').addClass('hidden');
+          hideMessage();
+        }, 1200);
+      })
+      .fail(function(jqXHR, textStatus, errorThrown){
+        let msg = 'Error al enviar el mensaje. Intenta nuevamente.';
+        if(jqXHR.status === 0){
+          msg = 'No se pudo conectar al servidor (posible CORS o URL incorrecta).';
+        } else if (jqXHR.responseJSON && jqXHR.responseJSON.message){
+          msg = jqXHR.responseJSON.message;
+        }
+        showMessage('error', msg);
+      })
+      .always(function(){
+        $('#btn-enviar').prop('disabled', false);// restaurar botón
+        $('#icon-enviar').removeClass().addClass('fa-solid fa-paper-plane text-xs');
+        $('#text-enviar').text('Enviar mensaje');
+      });
+
+    });
+
+  });
+</script>
+
+</body>
+</html>

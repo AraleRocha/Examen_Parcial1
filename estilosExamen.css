@@ -1,0 +1,116 @@
+body{
+    background-color:black;
+}
+
+.nav-btn{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    background:#161b22;
+    border:1px solid #30363d;
+    border-radius:6px;
+    padding:5px 10px;
+    font-size:12px;
+    cursor:pointer;
+    transition:border-color 0.2s,color 0.2s;
+}
+
+.nav-btn:hover{
+    border-color:#388bfd;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:scale(0.94) translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+.animate-modal-in{
+    animation:modalIn 0.22s ease;
+}
+
+.m-input{
+    width:100%;
+    background:#080d16;
+    border:1px solid #1a2336;
+    border-radius:10px;
+    padding:11px 14px 11px 40px;
+    color:#e6edf3;
+    font-size:14px;
+    outline:none;
+    transition:border-color 0.2s,box-shadow 0.2s;
+}
+
+.m-input:focus{
+    border-color:#388bfd;
+    box-shadow:0 0 0 3px rgba(56,139,253,0.12);
+}
+
+.m-input::placeholder{
+    color:#253248;
+}
+
+.m-wrap{
+    position:relative;
+}
+
+.m-ico{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:12px;
+    color:#253248;
+    pointer-events:none;
+    transition:color 0.2s;
+}
+
+.m-wrap:focus-within .m-ico{
+    color:#388bfd;
+}
+
+.m-btn{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#1e3a8a,#1d4ed8,#2563eb);
+    border:1px solid rgba(59,130,246,0.4);
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    letter-spacing:0.03em;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    box-shadow:0 4px 20px rgba(37,99,235,0.3);
+}
+
+.proj-tag{
+    font-size:11px;
+    font-weight:600;
+    padding:2px 8px;
+    border-radius:4px;
+}
+
+.proj-tag.laravel{
+    background:rgba(239,68,68,0.15);
+    color:#f87171;
+    border:1px solid rgba(239,68,68,0.3);
+}
+
+.proj-tag.tailwind{
+    background:rgba(6,182,212,0.15);
+    color:#22d3ee;
+    border:1px solid rgba(6,182,212,0.3);
+}
+
+.hidden{
+    display:none!important;
+}
