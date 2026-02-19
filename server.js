@@ -1,12 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path'); 
 
 const app = express();
-app.use(cors()); // habilitar CORS para el frontend
+app.use(cors()); 
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, '.')));
+
 const REMOTE_URL = process.env.REMOTE_URL || 'https://diane-domesticable-eliz.ngrok-free.dev/enviar';
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'examen.html'));
+});
 
 app.post('/enviar', async (req, res) => {
   try {
@@ -14,7 +21,6 @@ app.post('/enviar', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
       validateStatus: () => true
     });
-    // reenviamos status y body tal cual venga del server remoto
     return res.status(resp.status).send(resp.data);
   } catch (err) {
     console.error('Proxy error:', err.stack || err.message || err);
@@ -23,4 +29,4 @@ app.post('/enviar', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Proxy corriendo en http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Proxy corriendo en puerto ${PORT}`));
