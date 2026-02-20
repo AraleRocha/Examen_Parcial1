@@ -1,4 +1,3 @@
-// server.js (versión con diagnóstico y robusta)
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -11,10 +10,10 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname)));
 
-// URL remota configurable
+// URL remota 
 const REMOTE_URL = process.env.REMOTE_URL || 'https://diane-domesticable-eliz.ngrok-free.dev/enviar';
 
-// Ruta raíz: comprobar y servir examen.html
+// Visualizar primero examen.html
 app.get('/', (req, res) => {
   const file = path.join(__dirname, 'examen.html');
   console.log('DEBUG: __dirname =', __dirname);
